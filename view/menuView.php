@@ -28,4 +28,10 @@ class MenuView {
   private function makeLi($data){
     return '<li class="active">'.$data["titre"].'</li>';    
   }
+
+  public function makeScrollableMenu($menu){
+    return '<div class="scrollable" onclick="showHideMenu(this)">liste des épisodes'.$menu."</div>";
+  }
+
+
 }

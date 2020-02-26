@@ -43,8 +43,28 @@ header a{
 header ul{
 	list-style: none;
 	display:flex;
-	justify-content:flex-end;
+	justify-content:center;
 	padding-left:0px;
+}
+
+.scrollable {
+    cursor: pointer;
+    color: #5dc0e9;
+    font-size:0.9rem;
+    text-transform:uppercase;
+}
+
+.scrollable:hover{
+	color:orange;
+}
+
+.scrollable ul{
+	display: none;
+}
+
+.scrollable ul.visible{
+	display: flex;
+	flex-direction: column;
 }
 
 .content{

@@ -12,7 +12,7 @@ $config = [
 	"dbname" => "blog_forteroche",
 	"user"     => "root",
   "password" => "mysql",
-  "path"     => "OpenClassrooms/Projet_3/Projet/view/", //changer par le sous dossier où est rangé votre projet
+  "path"     => "OpenClassrooms/Projet_3/Projet/view", //changer par le sous dossier où est rangé votre projet
   "debug"    => true,
 ];
 

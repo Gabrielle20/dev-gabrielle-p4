@@ -18,8 +18,11 @@ class Front
    */
   function __construct($uri)
   {
-    if ($uri[0] === "")         $this->afficheAccueil();
-    if ($uri[0] === "episode") $this->afficheEpisode($uri[1]);
+    switch($uri[0]){
+      case "episode" : $this->afficheEpisode($uri[1]); break;
+      case "contact" : $this->contact(); break;
+      default        : $this->afficheAccueil(); break;
+    }
     
     
     $menu = new Menu("getAllPageWithoutChapterTitle");
@@ -68,6 +71,11 @@ class Front
   }
   
 
+
+  private function contact(){
+    $this->content = "jhlzdl";
+    $this->title = "Contact";
+  }
 
 
 

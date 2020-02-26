@@ -14,7 +14,6 @@ class Model
 	{
     global $config;
 	  $this->bdd = new PDO('mysql:host=localhost;dbname=' .$config["dbname"].';charset=utf8', $config["user"], $config["password"]);
-    // $this->bdd = new PDO('mysql:host=localhost;dbname=blog_forteroche;charset=utf8', 'root', 'mysql');
     $this->bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
 	}
 

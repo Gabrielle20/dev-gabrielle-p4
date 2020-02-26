@@ -45,6 +45,7 @@ class Menu{
 
   private function getPages($surround=true){
     $pages = $this->model->getPages();
+    // die(var_dump($pages));
     $html  = $this->view->makeMenuFromArray($pages, $this->currentPage);
     if ($surround) $html = $this->view->surroundTag("ul", $html);
     return $html;
@@ -54,6 +55,7 @@ class Menu{
   private function getAllPageWithoutChapterTitle(){
     $pages    = $this->getPages(false);
     $episodes = $this->view->surroundTag("ul", $this->getEpisodes(false, false));
+    $episodes = $this->view->makeScrollableMenu($episodes);
     $episodes = $this->view->surroundTag("li", $episodes);
     return $this->view->surroundTag("ul", $pages.$episodes);
   }

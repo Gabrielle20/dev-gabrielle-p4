@@ -23,7 +23,7 @@ class MenuModel extends Model
 
   public function getPages()
   {
-    $sql = "SELECT `title`, 'slug' FROM `pages`";
+    $sql = "SELECT `title`, `slug` FROM `pages`";
     $this->query($sql, true);
     return $this->data;
   }
