@@ -20,9 +20,10 @@ class Front
   {
     switch($uri[0]){
       case "episode" : $this->afficheEpisode($uri[1]); break;
-      case "contact" : $this->contact(); break;
+      case "contact" : $this->contact();break;
+      case "a-propos": $this->about(); break;
       default        : $this->afficheAccueil(); break;
-    }
+  }
     
     
     $menu = new Menu("getAllPageWithoutChapterTitle");
@@ -73,8 +74,17 @@ class Front
 
 
   private function contact(){
-    $this->content = "jhlzdl";
+
+    $this->content = file_get_contents("./template/form.html");
     $this->title = "Contact";
+
+
+  }
+
+
+  private function about(){
+    $this->content = file_get_contents("./template/a-propos.html");
+    $this->title = "À propos";
   }
 
 

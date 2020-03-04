@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_ALL | E_STRICT);
   ini_set('display_errors',1);
-
   
 require_once "controller/front.php";
 require_once "controller/security.php";
@@ -12,7 +11,7 @@ $config = [
 	"dbname" => "blog_forteroche",
 	"user"     => "root",
   "password" => "mysql",
-  "path"     => "OpenClassrooms/Projet_3/Projet/view", //changer par le sous dossier où est rangé votre projet
+  "path"     => "/OpenClassrooms/Projet_3/Projet/view", //changer par le sous dossier où est rangé votre projet
   "debug"    => true,
 ];
 

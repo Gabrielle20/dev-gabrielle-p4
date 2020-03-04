@@ -26,7 +26,7 @@ class MenuView {
   }
 
   private function makeLi($data){
-    return '<li class="active">'.$data["titre"].'</li>';    
+    return '<li class="active">'.$data["title"].'</li>';    
   }
 
   public function makeScrollableMenu($menu){

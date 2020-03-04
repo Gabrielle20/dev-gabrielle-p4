@@ -48,15 +48,6 @@ class Episode
       return $view->html;
     }
 
-
-//AJOUTE PAR MOI: Mardi 21/01/2020
-    
-    // elseif(isset($arguments['last']))
-    // {
-    //   $view = new View($this->data, "lastEpisode");
-
-    //   return $view->html;
-    // }
   }
 
 

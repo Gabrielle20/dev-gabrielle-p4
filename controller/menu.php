@@ -45,7 +45,6 @@ class Menu{
 
   private function getPages($surround=true){
     $pages = $this->model->getPages();
-    // die(var_dump($pages));
     $html  = $this->view->makeMenuFromArray($pages, $this->currentPage);
     if ($surround) $html = $this->view->surroundTag("ul", $html);
     return $html;
