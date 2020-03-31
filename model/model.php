@@ -5,7 +5,7 @@
 class Model 
 {
 
-	private $bdd;
+	protected $bdd;
   public $data;
   
 

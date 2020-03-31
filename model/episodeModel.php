@@ -14,7 +14,8 @@ class EpisodeModel extends Model
     extract($argument);
     if (isset($list))             return $this->getEpisodeList();
     if (isset($argument["slug"])) return $this->getDataFromSlug($argument["slug"]);
-    //if (isset($last))             return $this->getLastEpisodes();
+    if (isset($new))              return $this->addNewEpisode($new);
+    if (isset($edit))             return $this->getEpisodeListToEdit();
   }
 
 
@@ -30,11 +31,19 @@ class EpisodeModel extends Model
   }
 
 
-//AJOUTE PAR MOI: Mardi 21/01/2020
-  
-  private function getLastEpisodes(){
-    $sql = "SELECT title AS '{{ title }}', content AS '{{ content }}' FROM `episodes` ORDER BY date DESC";
+  private function addNewEpisode($data){
+    $sql = "INSERT INTO episodes (title, slug, author, date_time, content) VALUES (:title, :slug, :author, NOW, :content)";
+
+    $request = $this->bdd->prepare($sql);
+    $result = $request->execute($data);
+  }
+
+
+  private function getEpisodeListToEdit(){
+    $sql = "SELECT id AS '{{ id }}', title AS '{{ title }}', date_time AS '{{ date }}' FROM `episodes`";
     $this->query($sql, true);
   }
 
+  
 }
+

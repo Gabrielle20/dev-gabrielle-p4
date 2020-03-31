@@ -23,7 +23,7 @@ class Front
       case "contact" : $this->contact();break;
       case "a-propos": $this->about(); break;
       default        : $this->afficheAccueil(); break;
-  }
+    }
     
     
     $menu = new Menu("getAllPageWithoutChapterTitle");
@@ -41,7 +41,6 @@ class Front
     $this->html .= $view->html;
 
   }
-
 
 
 

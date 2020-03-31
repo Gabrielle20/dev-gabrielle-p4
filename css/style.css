@@ -32,6 +32,10 @@ a:hover{
 	color:orange;
 }
 
+ul{
+	list-style-type: none;
+}
+
 header{
 	display:flex;
 	align-items:center;
@@ -52,7 +56,6 @@ header img{
 }
 
 header ul{
-	list-style: none;
 	display:flex;
 	/*justify-content:center;*/
 	padding-left:0px;
@@ -176,3 +179,16 @@ button:hover{
 	margin-right:25px;
 	margin-top:2.7rem;
 }
+
+
+
+/*ACCUEIL BACK*/
+aside ul li{
+	margin-left:-40px;
+}
+
+aside ul li a{
+	text-decoration:none;
+}
+
+

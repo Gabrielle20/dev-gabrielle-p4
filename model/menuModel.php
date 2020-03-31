@@ -27,4 +27,12 @@ class MenuModel extends Model
     $this->query($sql, true);
     return $this->data;
   }
+
+
+  public function getBackMenu()
+  {
+    $sql = "SELECT `title`, `slug` FROM `backMenu`";
+    $this->query($sql, true);
+    return $this->data;
+  }
 }

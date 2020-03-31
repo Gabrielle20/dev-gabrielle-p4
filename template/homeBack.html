@@ -1,0 +1,20 @@
+<div class="content">
+	<section>
+		<h2>Nouvel Épisode</h2>
+		<form method="post" action="">
+			<input type="text" name="title" id="title" placeholder="Titre">
+			<textarea name="content"></textarea>
+			<input type="submit" name="submit">
+		</form>
+	</section>
+	<aside>
+		<h2>Opérations</h2>
+		{{ edition }}
+	</aside>
+</div>
+
+
+
+
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>tinymce.init({ selector:'textarea' });</script>

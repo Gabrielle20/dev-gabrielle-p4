@@ -4,6 +4,7 @@ error_reporting(E_ALL | E_STRICT);
   
 require_once "controller/front.php";
 require_once "controller/security.php";
+require_once "controller/back.php";
 
 
 
@@ -25,7 +26,10 @@ if ($config["debug"]){
 
 $safeData = new Security(
   [
-    "post" =>[],
+    "post" =>[
+      "title" => FILTER_SANITIZE_STRING,
+      "content" => FILTER_SANITIZE_STRING
+    ],
     "uri" => $config["path"]
   ]
 );

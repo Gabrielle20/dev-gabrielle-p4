@@ -58,4 +58,14 @@ class Menu{
     $episodes = $this->view->surroundTag("li", $episodes);
     return $this->view->surroundTag("ul", $pages.$episodes);
   }
+
+
+  private function getBackMenu($surround=true){
+    $pages = $this->model->getBackMenu();
+    $html = $this->view->makeMenuFromArray($pages, $this->currentPage);
+    if ($surround) $html = $this->view->surroundTag("ul", $html);
+    return $html;
+  }
+
+
 }

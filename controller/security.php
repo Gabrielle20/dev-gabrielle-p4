@@ -7,9 +7,11 @@ class Security
 {
   
   public $uri;
+  public $post;
 
   function __construct($argument)
   {
+    if (isset($argument["post"])) $this->post = filter_input_array(INPUT_POST, $argument["post"]);
     if (isset($argument["uri"])) $this->sanityzeUrl($argument["uri"]);
   }
 
