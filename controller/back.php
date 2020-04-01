@@ -58,7 +58,8 @@ Class Back{
 		$view =new View(
 			[
 				"{{ newepisode }}" =>$episodes->html,
-				"{{ edition }}" =>$edition->html
+				"{{ edition }}" =>$edition->html,
+				"{{ content }}"=>NULL
 			],
 			"homeBack"
 		);
@@ -79,9 +80,36 @@ Class Back{
 	private function editEpisode(){
 		$episodes = new Episode(['edit'=>true]);
 		$edition = new Menu("getBackMenu");
+		// $pageEdition = $edition;
 
-		$this->content = $episodes->html;
+		$view = new View(
+			[
+				"{{ content }}"=>$episodes->html,
+				"{{ edition }}"=>$edition->html
+			],
+			"homeBack"
+		);
+
+		$this->content = $view->html;
 		$this->title = "Édition d'épisodes";
+	}
+
+
+
+	private function editComment(){
+		$comment = new Comment(['editComment'=>true]);
+		$edition = new Menu("getBackMenu");
+
+		$view = new View(
+			[
+				"{{ content }}"=>$comment->html,
+				"{{ edition }}"=>$edition->html
+			],
+			"homeBack"
+		);
+
+		$this->content = $view->html;
+		$this->title = "Édition de commentaires";
 	}
 
 }

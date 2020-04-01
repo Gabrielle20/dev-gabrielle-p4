@@ -9,6 +9,7 @@ Class commentModel extends Model{
 		extract($argument);
 		if (isset($lastComments)) return $this->getLastComments();
 		if (isset($episode_id))	  return $this->getComment();
+		if (isset($editComment))  return $this->getCommentForEdit();
 	}
 
 
@@ -21,5 +22,11 @@ Class commentModel extends Model{
 	private function getComment($episode_id){
 		$sql = "SELECT episode_id AS '{{ episode_id }}', author AS '{{ author }}', date_time AS '{{ date }}', content AS '{{ comment }}' ORDER BY date_time DESC LIMIT 5";
 		$this->query($sql);
+	}
+
+
+	private function getCommentForEdit(){
+		$sql = "SELECT id AS '{{ id }}', author AS '{{ author }}', content AS '{{ content }}', date_time AS '{{ date }}', episode_id AS '{{ episode_id }}', etat AS '{{ state }}' FROM comments";
+		$this->query($sql, true);
 	}
 }

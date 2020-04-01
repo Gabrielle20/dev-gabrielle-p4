@@ -37,6 +37,13 @@ Class Comment
 
 			return $view->html;
 		}
+
+		if (isset($editComment))
+		{
+			$view = new View($this->data, "edit-comment");
+
+			return $view->html;
+		}
 	}
 
 }
