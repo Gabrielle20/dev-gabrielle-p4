@@ -12,12 +12,12 @@ Class Back{
 
 	public function __construct($uri){
 		$this->user = new User;
-		if(!isset($uri[1])){
+		if(!isset($uri[0])){
 			$this->afficheBackAccueil();
 		}
 
 		else{
-			switch($uri[1]){
+			switch($uri[0]){
 				case "edit-episode" : $this->editEpisode();break;
 				case "edit-comment" : $this->editComment();break;
 				default: $this->afficheBackAccueil(); break;
@@ -48,7 +48,7 @@ Class Back{
 				$data = $safeData->post;
 				$data["author"] = $this->user->name;
 				$data["slug"] = $this->makeSlug($data["title"]);
-				$episodes = new Episode(["new"=>$data]);
+				$episodes = new Episode(["save"=>$data]);
 			}
 		}
 		
@@ -80,7 +80,6 @@ Class Back{
 	private function editEpisode(){
 		$episodes = new Episode(['edit'=>true]);
 		$edition = new Menu("getBackMenu");
-		// $pageEdition = $edition;
 
 		$view = new View(
 			[

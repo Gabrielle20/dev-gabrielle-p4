@@ -35,16 +35,19 @@ class Episode
     
   }
 
-  private function afficheEpisode($slug){
-  }
-
-
 
   private function generatehtml($arguments){
     if(isset($arguments['list']))
     {
       $view = new View($this->data, "listEpisode");
 
+      return $view->html;
+    }
+
+    if (isset($argument['slug']))
+    {
+      $view = new View($this->data, "episode");
+      
       return $view->html;
     }
 

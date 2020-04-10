@@ -15,6 +15,7 @@ class Model
     global $config;
 	  $this->bdd = new PDO('mysql:host=localhost;dbname=' .$config["dbname"].';charset=utf8', $config["user"], $config["password"]);
     $this->bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
+    $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 
   protected function query($sql, $all=false)

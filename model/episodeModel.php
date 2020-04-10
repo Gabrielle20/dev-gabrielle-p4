@@ -12,9 +12,9 @@ class EpisodeModel extends Model
   {
     parent::__construct();
     extract($argument);
+    if (isset($save))              return $this->addNewEpisode($save);
     if (isset($list))             return $this->getEpisodeList();
     if (isset($argument["slug"])) return $this->getDataFromSlug($argument["slug"]);
-    if (isset($new))              return $this->addNewEpisode($new);
     if (isset($edit))             return $this->getEpisodeListToEdit();
   }
 
@@ -32,10 +32,11 @@ class EpisodeModel extends Model
 
 
   private function addNewEpisode($data){
-    $sql = "INSERT INTO episodes (title, slug, author, date_time, content) VALUES (:title, :slug, :author, NOW, :content)";
+    $sql = "INSERT INTO episodes (title, slug, author, date_time, content) VALUES (:title, :slug, :author, NOW(), :content)";
 
     $request = $this->bdd->prepare($sql);
     $result = $request->execute($data);
+
   }
 
 

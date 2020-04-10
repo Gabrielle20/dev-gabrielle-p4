@@ -25,6 +25,8 @@ class View{
   }
 
     private function mergeWithTemplate($args, $template){
+    	global $config;
+    	$args['{{ path }}'] = $config['path'];
 	    return str_replace(
 	      array_keys($args),
 	      $args,
@@ -39,6 +41,8 @@ class View{
 	    }
 	    return $html;
 	  }
+
+
 
 
 	

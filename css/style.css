@@ -192,3 +192,24 @@ aside ul li a{
 }
 
 
+
+/*ÉDITION D'ÉPISODES*/
+table{
+	width: 700px;
+	padding:10px;
+}
+
+table td{
+	text-align: center;
+}
+
+table a{
+	text-decoration: none;
+	color:black;
+}
+
+table:hover{
+	background-color: rgba(77, 134, 213, 0.6);
+}
+
+

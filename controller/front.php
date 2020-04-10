@@ -47,7 +47,20 @@ class Front
   private function afficheEpisode($slug){
 
     $monEpisode = new Episode(["slug"=>$slug]);
-    $this->html = $monEpisode->title;
+    $comments = new Comment(["slug"=>$slug]);
+
+    $view = new View (
+      [
+        "{{ episode }}"=>$monEpisode->html,
+        "{{ posterCommentaire }}"=>$comments->html,
+        "{{ commentaires }}"=>$comments->html
+      ],
+      "home"
+    );
+  
+    $this->title = $monEpisode->data['title'];
+    // $this->content = $monEpisode->data['content'];
+    $this->content = $view->html;
 
   }
 

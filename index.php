@@ -37,7 +37,7 @@ $safeData = new Security(
 
 switch ($safeData->uri[0]) {
   case 'admin':
-    $page = new Back($safeData->uri);
+    $page = new Back(array_slice($safeData->uri, 1));
     break;
   
   default:

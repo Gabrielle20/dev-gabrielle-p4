@@ -22,6 +22,7 @@ class MenuView {
 
   private function makeLiWithLink($data){
     global $config;
+
     return '<li><a href="'.$config["path"].'/'.$data["slug"].'">'.$data["title"].'</a></li>';
   }
 
