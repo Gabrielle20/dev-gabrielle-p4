@@ -44,9 +44,9 @@ class Episode
       return $view->html;
     }
 
-    if (isset($argument['slug']))
+    if (isset($arguments['slug']))
     {
-      $view = new View($this->data, "episode");
+      $view = new View($this->data, "episodeSeul");
       
       return $view->html;
     }
@@ -64,6 +64,14 @@ class Episode
 
       return $view->html;
 
+    }
+
+
+    if (isset($arguments['editUnEpisode']))
+    {
+      $view = new View($this->data, "home");
+
+      return $view->html;
     }
 
   }

@@ -14,8 +14,6 @@ Class Comment
 	{
 		$donnees = new commentModel($arguments);
 		$this->data = $donnees->data;
-
-
 		$this->html = $this->generatehtml($arguments);
 	}
 
@@ -33,7 +31,8 @@ Class Comment
 
 		if (isset($episode_id))
 		{
-			$view = new View($this->data, "Comments");
+			if (empty($this->data)) return file_get_contents("./template/messagePasDeCommentaire.html");
+			$view = new View($this->data, "comments");
 
 			return $view->html;
 		}
@@ -44,6 +43,17 @@ Class Comment
 
 			return $view->html;
 		}
+
+		if (isset($postComment))
+		{
+			return file_get_contents("./template/formulaireAjoutCommentaire.html");
+		}
 	}
+
+
+	// public function formulaireAjoutCommentaire()
+	// {
+	// 	return file_get_contents("./template/formulaireAjoutCommentaire.html");
+	// }
 
 }

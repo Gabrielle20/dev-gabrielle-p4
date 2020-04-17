@@ -16,11 +16,13 @@ class EpisodeModel extends Model
     if (isset($list))             return $this->getEpisodeList();
     if (isset($argument["slug"])) return $this->getDataFromSlug($argument["slug"]);
     if (isset($edit))             return $this->getEpisodeListToEdit();
+    if (isset($editUnEpisode))      return $this>editUnEpisode();
+    if (isset($delete))           return $this->deleteEpisode();
   }
 
 
   private function getDataFromSlug($slug){
-    $sql = "SELECT * FROM `episodes` WHERE `slug` = '$slug'";
+    $sql = "SELECT id, title AS '{{ title }}', title, content AS '{{ content }}' FROM `episodes` WHERE `slug` = '$slug'";
     $this->query($sql);
   }
 
@@ -43,6 +45,21 @@ class EpisodeModel extends Model
   private function getEpisodeListToEdit(){
     $sql = "SELECT id AS '{{ id }}', title AS '{{ title }}', date_time AS '{{ date }}' FROM `episodes`";
     $this->query($sql, true);
+  }
+
+
+  private function editUnEpisode(){
+    $sql = "UPDATE episodes SET content = {{ content }} WHERE id = {{ id }}";
+    $request = $this->bdd->prepare($sql);
+    $result = $request->execute($data);
+
+  }
+
+
+  private function deleteEpisode(){
+    $sql = "DELETE FROM episodes WHERE title = {{ title }}";
+    $request = $this->bdd->prepare($sql);
+    $result = $request->execute($data);
   }
 
   

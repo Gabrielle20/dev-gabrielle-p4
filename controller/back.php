@@ -55,7 +55,7 @@ Class Back{
 		$episodes = new Episode(['new'=>true]);
 		$edition = new Menu("getBackMenu");
 
-		$view =new View(
+		$view = new View(
 			[
 				"{{ newepisode }}" =>$episodes->html,
 				"{{ edition }}" =>$edition->html,
@@ -109,6 +109,11 @@ Class Back{
 
 		$this->content = $view->html;
 		$this->title = "Édition de commentaires";
+	}
+
+
+	private function editUnEpisode(){
+		
 	}
 
 }

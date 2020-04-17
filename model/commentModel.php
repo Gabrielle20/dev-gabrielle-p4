@@ -8,7 +8,7 @@ Class commentModel extends Model{
 		parent::__construct();
 		extract($argument);
 		if (isset($lastComments)) return $this->getLastComments();
-		// if (isset($episode_id))	  return $this->getComment();
+		if (isset($episode_id))	  return $this->getComment($episode_id);
 		if (isset($editComment))  return $this->getCommentForEdit();
 		if (isset($postComment))  return $this->postComment();
 	}
@@ -21,10 +21,10 @@ Class commentModel extends Model{
 	}
 
 
-	// private function getComment($episode_id){
-	// 	$sql = "SELECT episode_id AS '{{ episode_id }}', author AS '{{ author }}', date_time AS '{{ date }}', content AS '{{ comment }}' FROM `comments` ORDER BY date_time DESC LIMIT 15";
-	// 	$this->query($sql);
-	// }
+	private function getComment($episode_id){
+		$sql = "SELECT author AS '{{ author }}', date_time AS '{{ date }}', content AS '{{ comment }}' FROM `comments` WHERE `episode_id` = '$episode_id' ORDER BY date_time DESC ";
+		$this->query($sql, true);
+	}
 
 
 	private function getCommentForEdit(){
@@ -34,7 +34,7 @@ Class commentModel extends Model{
 
 
 	private function postComment(){
-		$sql = "INSERT INTO comments (title, slug, author, date_time, content) VALUES (:title, :slug, :author, NOW(), :content)";
+		$sql = "INSERT INTO comments (title, author, date_time, content) VALUES (:title, :author, NOW(), :content)";
 		$request = $this->bdd->prepare($sql);
     	$result = $request->execute($data);
 	}
