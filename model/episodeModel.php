@@ -12,12 +12,12 @@ class EpisodeModel extends Model
   {
     parent::__construct();
     extract($argument);
-    if (isset($save))              return $this->addNewEpisode($save);
+    if (isset($save))             return $this->addNewEpisode($save);
     if (isset($list))             return $this->getEpisodeList();
-    if (isset($argument["slug"])) return $this->getDataFromSlug($argument["slug"]);
+    if (isset($slug))             return $this->getDataFromSlug($slug);
     if (isset($edit))             return $this->getEpisodeListToEdit();
-    if (isset($editUnEpisode))      return $this>editUnEpisode();
-    if (isset($delete))           return $this->deleteEpisode();
+    if (isset($editUnEpisode))    return $this->editUnEpisode($editUnEpisode);
+    if (isset($delete))           return $this->deleteEpisode($id);
   }
 
 
@@ -43,12 +43,13 @@ class EpisodeModel extends Model
 
 
   private function getEpisodeListToEdit(){
-    $sql = "SELECT id AS '{{ id }}', title AS '{{ title }}', date_time AS '{{ date }}' FROM `episodes`";
+    $sql = "SELECT id AS '{{ id }}', title AS '{{ title }}', date_time AS '{{ date }}', slug AS '{{ episode_slug }}' FROM `episodes`";
     $this->query($sql, true);
   }
 
 
-  private function editUnEpisode(){
+  private function editUnEpisode($data){
+    if($data === true) return;
     $sql = "UPDATE episodes SET content = {{ content }} WHERE id = {{ id }}";
     $request = $this->bdd->prepare($sql);
     $result = $request->execute($data);
@@ -56,8 +57,8 @@ class EpisodeModel extends Model
   }
 
 
-  private function deleteEpisode(){
-    $sql = "DELETE FROM episodes WHERE title = {{ title }}";
+  private function deleteEpisode($id){
+    $sql = "DELETE FROM episodes WHERE id = {{ id }}";
     $request = $this->bdd->prepare($sql);
     $result = $request->execute($data);
   }

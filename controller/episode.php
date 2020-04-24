@@ -60,6 +60,10 @@ class Episode
 
     if (isset($arguments['edit']))
     {
+      for($i = 0; $i < count($this->data); $i++){
+        $this->data[$i]["{{ episode_slug }}"] = "edit-un-episode/" . $this->data[$i]["{{ episode_slug }}"];
+      }
+
       $view = new View($this->data, "edit-episode");
 
       return $view->html;
@@ -69,7 +73,23 @@ class Episode
 
     if (isset($arguments['editUnEpisode']))
     {
-      $view = new View($this->data, "home");
+      if($arguments['editUnEpisode'] !== true){
+        global $config;
+        header("Location: " . $config["path"] . "/admin/edit-un-episode/") . $arguments['editUnEpisode']["slug"];
+      }
+
+      global $safeData;
+      // die(var_dump($safeData));
+      // $donnees = new EpisodeModel(["slug"->end($safeData->uri)]);
+      $this->data = $donnees->data;
+      $view = new View($this->data, "edit-un-episode");
+
+      return $view->html;
+    }
+
+    if (isset($arguments['delete']))
+    {
+      $view = new View($this->data, "edit-episode");
 
       return $view->html;
     }

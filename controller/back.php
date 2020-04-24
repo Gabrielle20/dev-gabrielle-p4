@@ -18,9 +18,10 @@ Class Back{
 
 		else{
 			switch($uri[0]){
-				case "edit-episode" : $this->editEpisode();break;
-				case "edit-comment" : $this->editComment();break;
-				default: $this->afficheBackAccueil(); break;
+				case "edit-episode" 	: $this->editEpisode();break;
+				case "edit-comment" 	: $this->editComment();break;
+				case "edit-un-episode" 	: $this->editUnEpisode(); break;
+				default 				: $this->afficheBackAccueil(); break;
 			}
 		}
 		
@@ -59,7 +60,7 @@ Class Back{
 			[
 				"{{ newepisode }}" =>$episodes->html,
 				"{{ edition }}" =>$edition->html,
-				"{{ content }}"=>NULL
+				"{{ content }}"=> file_get_contents("./template/ajoute-episode.html")
 			],
 			"homeBack"
 		);
@@ -113,7 +114,28 @@ Class Back{
 
 
 	private function editUnEpisode(){
-		
+		global $safeData;
+		if($safeData->post !== null){
+			$data = $safeData->post;
+			$data["slug"] = $this->makeSlug($data["title"]);
+			$episode = new Episode(['editUnEpisode' => $data]);
+		}
+
+		else{
+			$episode = new Episode(['editUnEpisode' => true]);
+		}
+
+		$edition = new Menu("getBackMenu");
+		$view = new View(
+			[
+				"{{ content }}" => $episode->html,
+				"{{ edition }}" => $edition->html
+			],
+			"homeBack"
+		);
+
+		$this->content = $view->html;
+		$this->title = "Édition d'un épisode" . $episode->data["title"];
 	}
 
 }
