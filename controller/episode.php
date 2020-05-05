@@ -79,11 +79,22 @@ class Episode
       }
 
       global $safeData;
-      // die(var_dump($safeData));
-      // $donnees = new EpisodeModel(["slug"->end($safeData->uri)]);
+
+      if ($safeData->post !== null){
+        if ($safeData->post["submit"] === "Mise à jour") {
+          die(var_dump($safeData->post));
+          $donnees = new EpisodeModel(["editUnEpisode" => $safeData->post]);
+        }
+      }
+
+      $donnees = new EpisodeModel(["slug"=>end($safeData->uri)]);
       $this->data = $donnees->data;
+      $data = $this->data;
+      unset($data["id"]);
+      unset($data["title"]);
       $view = new View($this->data, "edit-un-episode");
 
+      // die(var_dump($view->html) . var_dump($donnees));
       return $view->html;
     }
 

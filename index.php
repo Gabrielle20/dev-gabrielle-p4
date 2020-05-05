@@ -27,8 +27,10 @@ if ($config["debug"]){
 $safeData = new Security(
   [
     "post" =>[
-      "title" => FILTER_SANITIZE_STRING,
-      "content" => FILTER_SANITIZE_STRING
+      "title"   => "safeString",
+      "content" => "safeString",
+      "id"      => FILTER_SANITIZE_NUMBER_INT,
+      "submit"  => "safeString"
     ],
     "uri" => $config["path"]
   ]

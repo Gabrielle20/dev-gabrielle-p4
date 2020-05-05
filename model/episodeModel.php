@@ -22,7 +22,7 @@ class EpisodeModel extends Model
 
 
   private function getDataFromSlug($slug){
-    $sql = "SELECT id, title AS '{{ title }}', title, content AS '{{ content }}' FROM `episodes` WHERE `slug` = '$slug'";
+    $sql = "SELECT id, id AS '{{ id }}', title AS '{{ title }}', title, content AS '{{ content }}' FROM `episodes` WHERE `slug` = '$slug'";
     $this->query($sql);
   }
 
@@ -50,7 +50,7 @@ class EpisodeModel extends Model
 
   private function editUnEpisode($data){
     if($data === true) return;
-    $sql = "UPDATE episodes SET content = {{ content }} WHERE id = {{ id }}";
+    $sql = "UPDATE episodes SET content = :content WHERE id = :id";
     $request = $this->bdd->prepare($sql);
     $result = $request->execute($data);
 
