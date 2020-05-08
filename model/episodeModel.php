@@ -52,7 +52,8 @@ class EpisodeModel extends Model
     if($data === true) return;
     $sql = "UPDATE episodes SET content = :content WHERE id = :id";
     $request = $this->bdd->prepare($sql);
-    $result = $request->execute($data);
+    // die(var_dump($data));
+    $result = $request->execute($data, $request);
 
   }
 
@@ -60,7 +61,7 @@ class EpisodeModel extends Model
   private function deleteEpisode($id){
     $sql = "DELETE FROM episodes WHERE id = {{ id }}";
     $request = $this->bdd->prepare($sql);
-    $result = $request->execute($data);
+    $result = $request->execute($data, $request);
   }
 
   

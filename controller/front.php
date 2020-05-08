@@ -53,12 +53,12 @@ class Front
     $view = new View (
       [
         "{{ episode }}"=>$monEpisode->html,
-        "{{ posterCommentaire }}"=>$commenter->html,
-        //"{{ posterCommentaires }}"=>$comments->formulaireAjoutCommentaire()
-        "{{ commentaires }}"=>$comments->html
+        "{{ commentaires }}"=>$comments->html,
+        "{{ posterCommentaires }}"=>$commenter->html
       ],
       "episode"
     );
+    var_dump($commenter->html);
   
     $this->title = $monEpisode->data['title'];
     $this->content = $view->html;
