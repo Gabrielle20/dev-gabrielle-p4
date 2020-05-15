@@ -89,10 +89,11 @@ class Episode
 
       $donnees = new EpisodeModel(["slug"=>end($safeData->uri)]);
       $this->data = $donnees->data;
-      $data = $this->data;
-      unset($data["id"]);
-      unset($data["title"]);
-      $view = new View($this->data, "edit-un-episode");
+      $view = new View([
+        '{{ id }}'            => $this->data["{{ id }}"],
+        '{{ title }}'         => $this->data["{{ title }}"],
+        '{{ content }}'       => $this->data["{{ content }}"],
+      ], "edit-un-episode");
 
       // die(var_dump($view->html) . var_dump($donnees));
       return $view->html;

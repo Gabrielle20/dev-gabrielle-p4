@@ -48,17 +48,15 @@ class Front
 
     $monEpisode = new Episode(["slug"=>$slug]);
     $comments = new Comment(["episode_id"=>$monEpisode->data["id"]]);
-    $commenter = new Comment(["postComment"]);
 
     $view = new View (
       [
         "{{ episode }}"=>$monEpisode->html,
         "{{ commentaires }}"=>$comments->html,
-        "{{ posterCommentaires }}"=>$commenter->html
+        "{{ posterCommentaires }}"=>file_get_contents("./template/formulaireAjoutCommentaire.html")
       ],
       "episode"
     );
-    var_dump($commenter->html);
   
     $this->title = $monEpisode->data['title'];
     $this->content = $view->html;

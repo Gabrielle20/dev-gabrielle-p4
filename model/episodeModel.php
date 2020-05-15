@@ -28,7 +28,7 @@ class EpisodeModel extends Model
 
 
   private function getEpisodeList(){
-    $sql = "SELECT title AS '{{ title }}', content AS '{{ content }}' FROM `episodes` ORDER BY id DESC";
+    $sql = "SELECT title AS '{{ title }}', content AS '{{ content }}', slug AS '{{ slug }}' FROM `episodes` ORDER BY id DESC";
     $this->query($sql, true);
   }
 
@@ -37,7 +37,12 @@ class EpisodeModel extends Model
     $sql = "INSERT INTO episodes (title, slug, author, date_time, content) VALUES (:title, :slug, :author, NOW(), :content)";
 
     $request = $this->bdd->prepare($sql);
-    $result = $request->execute($data);
+    $result = $request->execute([
+      'title'     => $data["title"],
+      'author'    => $data["author"],
+      'content'   => $data["content"],
+      'slug'      => $data["slug"]
+    ]);
 
   }
 
@@ -50,10 +55,14 @@ class EpisodeModel extends Model
 
   private function editUnEpisode($data){
     if($data === true) return;
-    $sql = "UPDATE episodes SET content = :content WHERE id = :id";
+    $sql = "UPDATE episodes SET content = :content, title = :title, slug= :slug WHERE id = :id";
     $request = $this->bdd->prepare($sql);
-    // die(var_dump($data));
-    $result = $request->execute($data, $request);
+    $result = $request->execute([
+      'content'   =>$data["content"],
+      'id'        => $data["id"],
+      'slug'      => $data["slug"],
+      'title'     => $data["title"]
+    ]);
 
   }
 
@@ -63,6 +72,8 @@ class EpisodeModel extends Model
     $request = $this->bdd->prepare($sql);
     $result = $request->execute($data, $request);
   }
+
+
 
   
 }

@@ -36,6 +36,11 @@ Class commentModel extends Model{
 	private function postComment(){
 		$sql = "INSERT INTO comments (title, author, date_time, content) VALUES (:title, :author, NOW(), :content)";
 		$request = $this->bdd->prepare($sql);
-    	$result = $request->execute($data);
+    	$result = $request->execute([
+	      'content'   	=>$data["content"],
+	      'id'        	=> $data["id"],
+	      'episode_id'	=> $data["episode_id"],
+	      'author'    	=> $data["author"]
+    	]);
 	}
 }

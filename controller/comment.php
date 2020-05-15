@@ -44,11 +44,6 @@ Class Comment
 			return $view->html;
 		}
 
-		if (isset($postComment))
-		{
-			return file_get_contents("./template/formulaireAjoutCommentaire.html");
-			die(var_dump($postComment));
-		}
 	}
 
 

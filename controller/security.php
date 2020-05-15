@@ -46,4 +46,9 @@ class Security
     return $tmp;
   }
 
+  // $password = $mysqli->escape_string(password_hash(['password'], PASSWORD_BCRYPT));
+  // $hash = $mysqli->escape_string(md5(rand(0, 1000)));
+
+
+
 }

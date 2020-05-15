@@ -13,7 +13,8 @@ Class Back{
 	public function __construct($uri){
 		$this->user = new User;
 		if(!isset($uri[0])){
-			$this->afficheBackAccueil();
+			// $this->afficheBackAccueil();
+			$this->register();
 		}
 
 		else{
@@ -40,6 +41,22 @@ Class Back{
 
         $this->html .= $view->html;
 	}
+
+
+	public function register(){
+		$user = new User(['register' => true]);
+		$view = new View(
+			[
+
+			]
+		);
+
+		$this->title = "Créer un nouveau compte";
+		$this->content = $view->html;
+	}
+
+
+
 
 
 	public function afficheBackAccueil(){
@@ -73,6 +90,7 @@ Class Back{
 	private function makeSlug($title){
 		$title = strtolower($title);
 		$title = str_replace(" ", "-", $title);
+		$title = str_replace("é", "e", $title);
 		return $title;
 	}
 
