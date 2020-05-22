@@ -1,22 +1,64 @@
 <?php
 
+require_once "./model/userModel.php";
+
 Class User{
 
 	public $name = "Jean Forteroche";
-	public $id;
+	public $id = null;
 	private $pseudo;
-	private $password;
 	private $email;
+	private $prenom;
 	public $data;
 	public $html;
 
 
-	function __construct($arguments)
+
+	function __construct()
   	{
-	    $donnees = new UserModel($arguments);
-	    $this->data = $donnees->data;
+  		//1.  on vérifie les informations en session
+  		if(empty($_SESSION)) $this->authByPostData();
+  		else $this->authByPostSession();
+
+  		//2. on vérifie les infos en post
+
+
+
+	    // $donnees = new UserModel($arguments);
+	    // $this->data = $donnees->data;
 	    
-	    $this->html = $this->generatehtml($arguments);
+	    // $this->html = $this->generatehtml($arguments);
+	}
+
+
+	private function authByPostData(){
+		global $safeData;
+		if ($safeData->post === null) return;
+		if ($safeData->post["pseudo"] === null || $safeData->post["password"] === null) return;
+		$data = new UserModel(["connect" => [
+			"pseudo" => $safeData->post["pseudo"],
+			"pwd" => $safeData->post["password"],
+		]]);
+		$this->hydrate($data);
+	}
+
+
+	private function authByPostSession(){
+		$_SESSION['pseudo'] = "{{ pseudo }}";
+		$_SESSION['password'] = "{{ password }}";
+
+		if (!isset($_SESSION['pseudo'], $_SESSION['password'])){
+			echo "Votre identifiant ou mot de passe sont incorrects";
+		}
+
+	}
+
+
+	private function hydrate($data){
+		if(!$data) return;
+		foreach ($data as $key => $value){
+			$this->$key = $value;
+		}
 	}
 
 

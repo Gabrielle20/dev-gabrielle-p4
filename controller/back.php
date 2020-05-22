@@ -11,11 +11,11 @@ Class Back{
 
 
 	public function __construct($uri){
-		$this->user = new User;
-		if(!isset($uri[0])){
-			// $this->afficheBackAccueil();
-			$this->register();
-		}
+		session_start();
+		$this->user = new User();
+		if ($this->user->id === null) $this->login();
+
+
 
 		else{
 			switch($uri[0]){
@@ -43,16 +43,23 @@ Class Back{
 	}
 
 
-	public function register(){
-		$user = new User(['register' => true]);
-		$view = new View(
-			[
+	// public function register(){
+	// 	$user = new User(['register' => true]);
+	// 	$view = new View(
+	// 		[
 
-			]
-		);
+	// 		]
+	// 	);
 
-		$this->title = "Créer un nouveau compte";
-		$this->content = $view->html;
+	// 	$this->title = "Créer un nouveau compte";
+	// 	$this->content = $view->html;
+	// }
+
+
+
+	private function login(){
+		$this->content = file_get_contents("./template/authentification.html");
+	    $this->title = "Se connecter";
 	}
 
 

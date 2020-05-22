@@ -30,7 +30,9 @@ $safeData = new Security(
       "title"   => "safeString",
       "content" => "safeString",
       "id"      => FILTER_SANITIZE_NUMBER_INT,
-      "submit"  => "safeString"
+      "submit"  => "safeString",
+      "pseudo"  => "safeString",
+      "password"=> "safeString"
     ],
     "uri" => $config["path"]
   ]

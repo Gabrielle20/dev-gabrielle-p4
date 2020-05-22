@@ -7,15 +7,18 @@ class UserModel extends Model
 	{
 		parent::__construct();
 		extract($argument);
-		if (isset($connect))		return $this->connect();
+		if (isset($connect))		return $this->connect($connect);
 		if (isset($register))		return $this->createNewAccount();
 		if (isset($logout))			return $this->logOut();
 	}
 
 
 
-	private function connect($pseudo, $password){
-		$sql = 
+	private function connect($data){
+		$sql = "SELECT * FROM ’user’ WHERE ’pseudo’ = :pseudo AND ’password’ = :pwd";
+		$request = $this->bdd->prepare($sql);
+    	$request->execute($data);
+    	$this->data = $requiest->fetch();
 	}
 
 
