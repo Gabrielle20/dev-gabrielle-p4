@@ -15,10 +15,10 @@ class UserModel extends Model
 
 
 	private function connect($data){
-		$sql = "SELECT * FROM ’user’ WHERE ’pseudo’ = :pseudo AND ’password’ = :pwd";
+		$sql = "SELECT pseudo, email, name, prenom FROM users WHERE pseudo = :pseudo AND password = :pwd";
 		$request = $this->bdd->prepare($sql);
     	$request->execute($data);
-    	$this->data = $requiest->fetch();
+    	$this->data = $request->fetch();
 	}
 
 

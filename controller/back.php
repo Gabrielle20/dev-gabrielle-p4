@@ -11,7 +11,6 @@ Class Back{
 
 
 	public function __construct($uri){
-		session_start();
 		$this->user = new User();
 		if ($this->user->id === null) $this->login();
 

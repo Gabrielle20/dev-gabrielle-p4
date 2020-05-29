@@ -1,6 +1,7 @@
 <?php
 
 require_once "./model/userModel.php";
+require_once "./controller/SessionManager.php";
 
 Class User{
 
@@ -11,14 +12,16 @@ Class User{
 	private $prenom;
 	public $data;
 	public $html;
+	public $session;
 
 
 
 	function __construct()
   	{
   		//1.  on vérifie les informations en session
-  		if(empty($_SESSION)) $this->authByPostData();
-  		else $this->authByPostSession();
+  		$this->session = new SessionManager();
+  		if(empty($this->session->name)) $this->authByPostData();
+  		else $this->authBySession();
 
   		//2. on vérifie les infos en post
 
@@ -33,24 +36,24 @@ Class User{
 
 	private function authByPostData(){
 		global $safeData;
-		if ($safeData->post === null) return;
-		if ($safeData->post["pseudo"] === null || $safeData->post["password"] === null) return;
+		if ($safeData->post === null) return $this->session->end();
+		if ($safeData->post["pseudo"] === null || $safeData->post["password"] === null) return $this->session->end();
 		$data = new UserModel(["connect" => [
 			"pseudo" => $safeData->post["pseudo"],
 			"pwd" => $safeData->post["password"],
 		]]);
-		$this->hydrate($data);
+		$this->hydrate($data->data);
 	}
 
 
-	private function authByPostSession(){
-		$_SESSION['pseudo'] = "{{ pseudo }}";
-		$_SESSION['password'] = "{{ password }}";
+	private function authBySession(){
+		if(isset($this->session->pseudo)) return;
+		$this->pseudo =$this->session->pseudo;
+		$this->email = $this->session->email;
+		$this->name = $this->session->name;
+		$this->prenom = $this->session->prenom;
 
-		if (!isset($_SESSION['pseudo'], $_SESSION['password'])){
-			echo "Votre identifiant ou mot de passe sont incorrects";
-		}
-
+		// die(var_dump($this));
 	}
 
 
@@ -58,6 +61,7 @@ Class User{
 		if(!$data) return;
 		foreach ($data as $key => $value){
 			$this->$key = $value;
+			$this->session->update($key, $value);
 		}
 	}
 
