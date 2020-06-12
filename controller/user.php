@@ -7,9 +7,9 @@ Class User{
 
 	public $name = "Jean Forteroche";
 	public $id = null;
-	private $pseudo;
-	private $email;
-	private $prenom;
+	public $pseudo;
+	public $email;
+	public $prenom;
 	public $data;
 	public $html;
 	public $session;
@@ -47,14 +47,13 @@ Class User{
 
 
 	private function authBySession(){
-		if(isset($this->session->pseudo)) return;
+		if(! isset($this->session->pseudo)) return;
 		$this->pseudo =$this->session->pseudo;
 		$this->email = $this->session->email;
 		$this->name = $this->session->name;
 		$this->prenom = $this->session->prenom;
 
-		// die(var_dump($this));
-	}
+	}	
 
 
 	private function hydrate($data){
@@ -66,18 +65,8 @@ Class User{
 	}
 
 
-	private function generatehtml($arguments){
-		if (isset($arguments['connect'])){
-			$view = new View($this->data, "authentification");
-
-			return $view->html;
-		}
-
-		if (isset($arguments['register'])){
-			$view = new View($this->data, "nouveau-compte");
-
-			return $view->html;
-		}
+	public function logout(){
+		$this->session->end();
 	}
 
 

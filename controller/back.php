@@ -12,15 +12,14 @@ Class Back{
 
 	public function __construct($uri){
 		$this->user = new User();
-		if ($this->user->id === null) $this->login();
-
-
-
+		if ($this->user->pseudo === null) $this->login();
 		else{
+			// if(!isset(uri[0])) $uri[0] ="";
 			switch($uri[0]){
 				case "edit-episode" 	: $this->editEpisode();break;
 				case "edit-comment" 	: $this->editComment();break;
 				case "edit-un-episode" 	: $this->editUnEpisode(); break;
+				case "deconnexion"		: $this->logout(); break;
 				default 				: $this->afficheBackAccueil(); break;
 			}
 		}
@@ -42,27 +41,10 @@ Class Back{
 	}
 
 
-	// public function register(){
-	// 	$user = new User(['register' => true]);
-	// 	$view = new View(
-	// 		[
-
-	// 		]
-	// 	);
-
-	// 	$this->title = "Créer un nouveau compte";
-	// 	$this->content = $view->html;
-	// }
-
-
-
 	private function login(){
 		$this->content = file_get_contents("./template/authentification.html");
 	    $this->title = "Se connecter";
 	}
-
-
-
 
 
 	public function afficheBackAccueil(){
@@ -91,6 +73,7 @@ Class Back{
 		$this->content = $view->html;
 	    $this->title = "Admin";
 		}
+
 
 
 	private function makeSlug($title){
@@ -160,6 +143,15 @@ Class Back{
 
 		$this->content = $view->html;
 		$this->title = "Édition d'un épisode" . $episode->data["title"];
+	}
+
+
+
+	private function logout(){
+		$this->user->logout();
+		$host = filter_input(INPUT_SERVER, "HTTP_HOST");
+        header("Location: http://" . $host . "/OpenClassrooms/Projet_3/Projet/view" . "/admin/");
+
 	}
 
 }

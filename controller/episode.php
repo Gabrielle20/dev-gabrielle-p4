@@ -75,14 +75,14 @@ class Episode
     {
       if($arguments['editUnEpisode'] !== true){
         global $config;
-        header("Location: " . $config["path"] . "/admin/edit-un-episode/") . $arguments['editUnEpisode']["slug"];
+        $host = filter_input(INPUT_SERVER, "HTTP_HOST");
+        header("Location:http://" . $host . $config["path"] . "/admin/edit-un-episode/" . $arguments['editUnEpisode']["slug"]);
       }
 
       global $safeData;
 
       if ($safeData->post !== null){
         if ($safeData->post["submit"] === "Mise à jour") {
-          die(var_dump($safeData->post));
           $donnees = new EpisodeModel(["editUnEpisode" => $safeData->post]);
         }
       }
@@ -95,7 +95,6 @@ class Episode
         '{{ content }}'       => $this->data["{{ content }}"],
       ], "edit-un-episode");
 
-      // die(var_dump($view->html) . var_dump($donnees));
       return $view->html;
     }
 

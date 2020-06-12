@@ -9,7 +9,7 @@ class UserModel extends Model
 		extract($argument);
 		if (isset($connect))		return $this->connect($connect);
 		if (isset($register))		return $this->createNewAccount();
-		if (isset($logout))			return $this->logOut();
+		// if (isset($logout))			return $this->logOut();
 	}
 
 

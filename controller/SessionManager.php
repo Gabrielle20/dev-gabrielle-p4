@@ -20,6 +20,6 @@ class SessionManager{
 	}
 
 	public function end(){
-		session_destroy();
+		session_unset();
 	}
 }
